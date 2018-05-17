@@ -67,6 +67,8 @@ func main() {
 
 func runCompress() (int64, error) {
     zip := zlib.NewWriter(writer)
+
+    defer writer.Flush()
     defer zip.Close()
 
     return io.Copy(zip, reader)
